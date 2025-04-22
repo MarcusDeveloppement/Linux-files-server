@@ -89,9 +89,9 @@ Toutes les VMs sont interconnectées sur un **réseau interne VirtualBox** (192.
 
 ---
 
-## 🧑‍💻 Auteur
+## Auteur
 
 Projet réalisé par **[Ton Nom]**  
-📅 Avril 2025 – Dans le cadre d’une formation en administration système et réseau.
+Avril 2025 – Dans le cadre d’une formation en administration système et réseau.
 
 ---
