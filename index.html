@@ -2,166 +2,189 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Projet Linux : Infrastructure de fichiers sécurisée</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header>
+    <div class="container">
       <h1>
         Projet Linux : Infrastructure de fichiers sécurisée avec Samba, LDAP et
         sauvegarde
       </h1>
-      <p class="subtitle">
-        Déploiement multi-VM simulant un environnement d’entreprise
-      </p>
-    </header>
 
-    <section class="intro">
       <h2>Contexte</h2>
       <p>
-        Dans le cadre de ma formation en administration système et réseau, j’ai
-        souhaité concevoir un projet concret et applicable en entreprise.
-        L’objectif était de simuler une infrastructure de partage de fichiers
-        centralisée et sécurisée, fonctionnant sous Linux, avec des services
-        répartis sur plusieurs machines virtuelles pour plus de clarté et de
-        réalisme.
+        Dans un environnement professionnel, la gestion centralisée des
+        utilisateurs et des fichiers est essentielle pour garantir la sécurité,
+        la traçabilité et la productivité. Ce projet vise à simuler une
+        infrastructure d'entreprise à petite échelle, typique d'une TPE ou d'une
+        PME, en utilisant exclusivement des technologies libres sous Linux.
       </p>
-    </section>
+      <p>
+        L'idée est de segmenter les responsabilités sur plusieurs serveurs
+        virtuels, comme cela se fait dans les environnements professionnels,
+        afin de faciliter l’administration, la maintenance et l’évolutivité du
+        système.
+      </p>
 
-    <section class="objectifs">
-      <h2>Objectifs du projet</h2>
+      <h2>Objectifs</h2>
       <p>
-        Le projet vise à mettre en place un serveur de fichiers fiable et
-        sécurisé accessible depuis des postes Windows, avec des utilisateurs
-        centralisés dans un annuaire LDAP, une gestion des quotas disque par
-        utilisateur, et un système de sauvegarde automatisée vers un serveur
-        distant.
-      </p>
-      <p>
-        Chaque élément a été choisi pour répondre aux standards techniques d’une
-        petite ou moyenne entreprise. L’environnement est hébergé sur VirtualBox
-        avec 4 machines virtuelles interconnectées.
-      </p>
-    </section>
-
-    <section class="archi">
-      <h2>Architecture</h2>
-      <p>
-        L'infrastructure repose sur quatre machines virtuelles, chacune ayant un
-        rôle spécifique :
-      </p>
-      <p>
-        La première VM héberge le service LDAP avec OpenLDAP, servant à
-        authentifier tous les utilisateurs du système. La seconde est dédiée au
-        service de fichiers Samba, qui s’appuie sur l’annuaire pour appliquer
-        des règles d’accès aux dossiers partagés. Une troisième machine agit
-        comme serveur de sauvegarde, recevant chaque nuit une copie des partages
-        via `rsync`. Enfin, une dernière VM Windows permet de simuler un poste
-        client accédant aux fichiers de manière sécurisée.
-      </p>
-    </section>
-
-    <section class="implementation">
-      <h2>Mise en œuvre</h2>
-      <p>
-        Après avoir configuré les IP fixes et les noms d’hôtes des machines,
-        j’ai commencé par installer OpenLDAP sur la première VM. J’y ai défini
-        une arborescence simple avec des groupes d'utilisateurs correspondant
-        aux départements (RH, IT, etc.). Ensuite, j’ai configuré Samba sur la
-        deuxième VM, en intégrant le support LDAP et en définissant des partages
-        réseau accessibles uniquement selon les groupes LDAP.
-      </p>
-      <p>
-        Des quotas disques ont été appliqués au niveau du système de fichiers
-        pour limiter l’usage de l’espace par utilisateur. Enfin, j’ai écrit un
-        script de sauvegarde avec `rsync`, exécuté chaque soir à 22h via une
-        tâche cron, pour transférer les données vers le serveur distant de
-        sauvegarde (VM3).
-      </p>
-    </section>
-
-    <section class="resultats">
-      <h2>Résultats</h2>
-      <p>
-        L’ensemble de l’infrastructure fonctionne de manière fluide. Depuis le
-        poste client Windows, il est possible de se connecter aux partages Samba
-        avec un compte LDAP et de voir uniquement les dossiers autorisés. En cas
-        de dépassement de quota, les utilisateurs sont bloqués automatiquement.
-        Le script de sauvegarde fonctionne de manière fiable et les logs
-        confirment le bon déroulement des transferts vers le serveur distant. Le
-        projet répond donc à tous les objectifs initiaux.
-      </p>
-    </section>
-
-    <section class="tech">
-      <h2>Technologies utilisées</h2>
-      <p>
-        Ce projet repose exclusivement sur des technologies libres et open
-        source, ce qui le rend adapté aux environnements à budget limité. Voici
-        les principaux outils utilisés :
+        L'objectif principal de ce projet est de déployer une infrastructure
+        complète, sécurisée et fonctionnelle, répondant aux standards d’une
+        architecture réseau classique :
       </p>
       <ul>
-        <li>Debian 11 sur les serveurs Linux</li>
-        <li>OpenLDAP pour l’annuaire d’authentification</li>
-        <li>Samba pour le partage de fichiers inter-systèmes</li>
-        <li>quota pour la gestion de l’espace disque utilisateur</li>
-        <li>rsync et cron pour la sauvegarde automatique</li>
-        <li>Windows 10 comme poste client de test</li>
+        <li>Contrôle d’accès basé sur les groupes grâce à un annuaire LDAP</li>
+        <li>Partage de fichiers sécurisé via Samba</li>
+        <li>Gestion des ressources grâce aux quotas utilisateurs</li>
+        <li>Sauvegarde automatisée quotidienne avec traçabilité</li>
+        <li>Interopérabilité entre systèmes Linux et Windows</li>
       </ul>
-    </section>
+      <p>
+        Le projet permet de simuler les situations rencontrées dans un cadre
+        professionnel réel : création de comptes, application de droits, gestion
+        du stockage, et validation des accès par des utilisateurs distants.
+      </p>
 
-    <section class="gallery">
+      <h2>Architecture</h2>
+      <p>
+        L’infrastructure repose sur quatre machines virtuelles, interconnectées
+        sur un réseau privé :
+      </p>
+      <ol>
+        <li>
+          <strong>VM1</strong> – Serveur LDAP : gère l’authentification
+          centralisée via OpenLDAP
+        </li>
+        <li>
+          <strong>VM2</strong> – Serveur Samba : partage les fichiers en se
+          basant sur les groupes LDAP
+        </li>
+        <li>
+          <strong>VM3</strong> – Serveur de sauvegarde : reçoit les backups
+          quotidiens de VM2 via rsync
+        </li>
+        <li>
+          <strong>VM4</strong> – Client Windows 10 : permet de valider l'accès
+          aux partages depuis un poste utilisateur
+        </li>
+      </ol>
+      <p>
+        Chaque serveur est configuré avec une IP fixe et un hostname clair pour
+        simplifier l'administration. L’environnement est hébergé sur VirtualBox
+        avec un réseau interne isolé.
+      </p>
+
+      <h2>Mise en œuvre</h2>
+      <p>
+        La première étape a consisté à mettre en place le serveur LDAP. Une
+        structure de base a été définie (dc=deblinux,dc=local), avec des OU pour
+        les utilisateurs et les groupes. Des comptes test ont été créés et
+        intégrés à des groupes métiers (ex: RH, IT).
+      </p>
+      <p>
+        Ensuite, sur le serveur Samba, les partages ont été définis dans le
+        fichier smb.conf, avec des droits d'accès reposant sur les groupes LDAP.
+        L’authentification Samba a été liée au serveur LDAP à l’aide de la
+        bibliothèque NSS et de PAM.
+      </p>
+      <p>
+        Des quotas disques ont été mis en place via l’outil
+        <strong>quota</strong>, activé dans fstab. Chaque utilisateur a reçu une
+        limite de stockage de 1 Go, ce qui permet de contrôler la consommation
+        d’espace.
+      </p>
+      <p>
+        Un script bash utilisant rsync a été rédigé pour sauvegarder
+        automatiquement les partages chaque nuit à 22h. Il est planifié via
+        crontab, et les résultats sont loggés dans un fichier journal.
+      </p>
+      <p>
+        Enfin, la VM Windows a été jointe au même réseau et utilisée pour tester
+        l'accès aux partages Samba via les identifiants LDAP. Des tests de
+        lecture/écriture, de quota et de restriction d’accès ont été effectués
+        avec succès.
+      </p>
+
+      <h2>Résultats</h2>
+      <p>
+        Le projet a permis de valider l’ensemble des fonctionnalités attendues :
+      </p>
+      <ul>
+        <li>
+          Les utilisateurs LDAP peuvent se connecter aux partages Samba selon
+          leurs droits
+        </li>
+        <li>Les quotas disques fonctionnent et bloquent les dépassements</li>
+        <li>
+          Les sauvegardes sont effectuées automatiquement chaque nuit avec
+          confirmation dans les logs
+        </li>
+        <li>
+          L’accès depuis Windows fonctionne sans configuration complexe côté
+          client
+        </li>
+      </ul>
+      <p>
+        L’infrastructure est stable, sécurisée et respecte les bonnes pratiques
+        de segmentation des services.
+      </p>
+
+      <h2>Technologies utilisées</h2>
+      <p>
+        L’ensemble de l’environnement repose sur des outils libres et standards
+        :
+      </p>
+      <ul>
+        <li>Debian 11 pour les 3 serveurs Linux</li>
+        <li>OpenLDAP pour l'annuaire</li>
+        <li>Samba pour le partage de fichiers</li>
+        <li>rsync + cron pour la sauvegarde automatique</li>
+        <li>quota pour la gestion de l’espace disque</li>
+        <li>Windows 10 comme client test</li>
+      </ul>
+
       <h2>Captures d’écran</h2>
-      <p>
-        Voici quelques illustrations du projet. Passez la souris pour les voir
-        apparaître :
-      </p>
-      <div class="screenshots">
-        <div class="screenshot-card">
-          <h3>Structure de l’annuaire LDAP</h3>
-          <img src="screenshots/ldap-tree.png" alt="Structure LDAP" />
-        </div>
-        <div class="screenshot-card">
-          <h3>Configuration des partages Samba</h3>
-          <img src="screenshots/samba-shares.png" alt="Partages Samba" />
-        </div>
-        <div class="screenshot-card">
-          <h3>Quota utilisateur appliqué</h3>
-          <img src="screenshots/quotas.png" alt="Quota disque" />
-        </div>
-        <div class="screenshot-card">
-          <h3>Script de sauvegarde automatisée</h3>
-          <img src="screenshots/rsync-backup.png" alt="Script rsync" />
-        </div>
-        <div class="screenshot-card">
-          <h3>Connexion depuis Windows</h3>
-          <img
-            src="screenshots/windows-access.png"
-            alt="Accès Samba depuis Windows"
-          />
-        </div>
-      </div>
-    </section>
+      <p class="hover-zone">→ Voir la structure de l'annuaire LDAP</p>
+      <img
+        src="screenshots/ldap-tree.png"
+        alt="Structure LDAP"
+        class="hover-image"
+      />
 
-    <section class="ameliorations">
-      <h2>Améliorations possibles</h2>
-      <p>
-        Pour aller plus loin, cette infrastructure pourrait être enrichie avec
-        des outils de supervision comme Netdata ou Grafana, afin de surveiller
-        l’état du système et l’utilisation du réseau. L’automatisation du
-        déploiement avec des outils comme Ansible permettrait également de
-        rendre l’installation reproductible. Enfin, le serveur LDAP pourrait
-        être remplacé ou synchronisé avec un Active Directory pour une meilleure
-        compatibilité en environnement mixte.
-      </p>
-    </section>
+      <p class="hover-zone">→ Voir la configuration des partages Samba</p>
+      <img
+        src="screenshots/samba-shares.png"
+        alt="Partages Samba"
+        class="hover-image"
+      />
 
-    <footer>
+      <p class="hover-zone">→ Voir l’application des quotas</p>
+      <img
+        src="screenshots/quotas.png"
+        alt="Quota disque"
+        class="hover-image"
+      />
+
+      <p class="hover-zone">→ Voir le script de sauvegarde automatique</p>
+      <img
+        src="screenshots/rsync-backup.png"
+        alt="Script rsync"
+        class="hover-image"
+      />
+
+      <p class="hover-zone">→ Voir l’accès depuis Windows</p>
+      <img
+        src="screenshots/windows-access.png"
+        alt="Accès Windows"
+        class="hover-image"
+      />
+
       <p>
-        Projet réalisé par [Ton Nom] • Avril 2025 • Administration système &
-        réseau
+        Ce projet constitue une base solide pour tout administrateur souhaitant
+        mettre en œuvre une infrastructure complète sous Linux.
       </p>
-    </footer>
+    </div>
   </body>
 </html>
