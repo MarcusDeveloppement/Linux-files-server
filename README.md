@@ -68,18 +68,6 @@ Toutes les VMs sont interconnectées sur un **réseau interne VirtualBox** (192.
 
 ---
 
-## Captures d’écran
-
-> Les images ci-dessous peuvent être intégrées dans GitHub Pages ou dans une section visuelle.
-
-- Structure de l'annuaire LDAP
-- Configuration des partages Samba
-- Application des quotas
-- Script `rsync` de sauvegarde
-- Accès Windows aux partages Samba
-
----
-
 ## Pistes d'amélioration
 
 - Ajout d’une interface Web d’administration (Webmin, Cockpit)
@@ -91,7 +79,7 @@ Toutes les VMs sont interconnectées sur un **réseau interne VirtualBox** (192.
 
 ## Auteur
 
-Projet réalisé par **[Ton Nom]**  
+Projet réalisé par **Marc.K**
 Avril 2025 – Dans le cadre d’une formation en administration système et réseau.
 
 ---
