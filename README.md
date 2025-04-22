@@ -2,13 +2,9 @@
 
 Ce projet simule une infrastructure de fichiers d’entreprise composée de **4 machines virtuelles** sous Linux et Windows. Il met en œuvre des services essentiels pour une gestion efficace, centralisée et sécurisée des utilisateurs et des fichiers : annuaire LDAP, serveur Samba, quotas disques, sauvegardes automatiques, et test d’accès depuis un client Windows.
 
----
-
 ## Contexte
 
 Dans un environnement professionnel, la gestion centralisée des utilisateurs et des ressources partagées est une nécessité. Ce projet a été conçu pour reproduire un cas d’usage concret en entreprise, tout en s’appuyant exclusivement sur des technologies open source.
-
----
 
 ## Objectifs
 
@@ -18,8 +14,6 @@ Dans un environnement professionnel, la gestion centralisée des utilisateurs et
 - Appliquer des **quotas disque** par utilisateur.
 - Mettre en place une **sauvegarde automatique** quotidienne.
 - Vérifier l’interopérabilité avec un **poste client Windows**.
-
----
 
 ## Architecture
 
@@ -32,8 +26,6 @@ Dans un environnement professionnel, la gestion centralisée des utilisateurs et
 
 Toutes les VMs sont interconnectées sur un **réseau interne VirtualBox** (192.168.100.0/24).
 
----
-
 ## Mise en œuvre
 
 1. **Installation et configuration de OpenLDAP** avec arborescence `dc=entreprise,dc=local`.
@@ -43,8 +35,6 @@ Toutes les VMs sont interconnectées sur un **réseau interne VirtualBox** (192.
 5. **Activation des quotas disques** (1 Go max par utilisateur).
 6. **Rédaction d'un script de sauvegarde `rsync`**, lancé chaque nuit via `cron`.
 7. **Test des accès depuis le poste Windows** : mappage des partages, tests de droits et quotas.
-
----
 
 ## Technologies utilisées
 
@@ -56,8 +46,6 @@ Toutes les VMs sont interconnectées sur un **réseau interne VirtualBox** (192.
 - **Windows 10**
 - **VirtualBox (réseau interne)**
 
----
-
 ## Résultats obtenus
 
 - Authentification LDAP fonctionnelle via Samba
@@ -66,7 +54,6 @@ Toutes les VMs sont interconnectées sur un **réseau interne VirtualBox** (192.
 - Sauvegarde automatisée transférée chaque nuit
 - Accès aux partages validé depuis un poste Windows
 
----
 
 ## Pistes d'amélioration
 
@@ -75,11 +62,9 @@ Toutes les VMs sont interconnectées sur un **réseau interne VirtualBox** (192.
 - Automatisation du déploiement via **Ansible**
 - Intégration à un Active Directory existant
 
----
 
 ## Auteur
 
 Projet réalisé par **Marc.K**
 Avril 2025 – Dans le cadre d’un projet personnel en administration système et réseau.
 
----
