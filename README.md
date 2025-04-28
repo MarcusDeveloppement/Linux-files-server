@@ -21,7 +21,7 @@ Dans un environnement professionnel, la gestion centralisée des utilisateurs et
 | ------- | --------------------- | ---------- | ------------------------------------------- |
 | **VM1** | Serveur LDAP          | Debian 12  | Gère les utilisateurs et groupes            |
 | **VM2** | Serveur Samba         | Debian 12  | Partages réseau sécurisés (connecté à LDAP) |
-| **VM3** | Serveur de sauvegarde | Debian 11  | Réception des sauvegardes via `rsync`       |
+| **VM3** | Serveur de sauvegarde | Debian 12  | Réception des sauvegardes via `rsync`       |
 | **VM4** | Poste client          | Windows 10 | Test des accès Samba avec comptes LDAP      |
 
 Toutes les VMs sont interconnectées sur un **réseau interne VirtualBox** (192.168.100.0/24).
@@ -44,7 +44,7 @@ Toutes les VMs sont interconnectées sur un **réseau interne VirtualBox** (192.
 - **rsync + cron**
 - **quota**
 - **Windows 10**
-- **VirtualBox (réseau interne)**
+- **VmWare (réseau interne)**
 
 ## Résultats obtenus
 
@@ -65,6 +65,6 @@ Toutes les VMs sont interconnectées sur un **réseau interne VirtualBox** (192.
 
 ## Auteur
 
-Projet réalisé par **Marc.K**
+Projet réalisé par **Marc.Khamchanh**
 Avril 2025 – Dans le cadre d’un projet personnel en administration système et réseau.
 
