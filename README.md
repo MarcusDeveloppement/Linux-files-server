@@ -2,13 +2,9 @@
 
 Ce projet simule une infrastructure de fichiers d’entreprise composée de **4 machines virtuelles** sous Linux et Windows. Il met en œuvre des services essentiels pour une gestion efficace, centralisée et sécurisée des utilisateurs et des fichiers : annuaire LDAP, serveur Samba, quotas disques, sauvegardes automatiques, et test d’accès depuis un client Windows.
 
----
-
 ## Contexte
 
 Dans un environnement professionnel, la gestion centralisée des utilisateurs et des ressources partagées est une nécessité. Ce projet a été conçu pour reproduire un cas d’usage concret en entreprise, tout en s’appuyant exclusivement sur des technologies open source.
-
----
 
 ## Objectifs
 
@@ -19,20 +15,16 @@ Dans un environnement professionnel, la gestion centralisée des utilisateurs et
 - Mettre en place une **sauvegarde automatique** quotidienne.
 - Vérifier l’interopérabilité avec un **poste client Windows**.
 
----
-
 ## Architecture
 
 | VM      | Rôle                  | OS         | Description                                 |
 | ------- | --------------------- | ---------- | ------------------------------------------- |
 | **VM1** | Serveur LDAP          | Debian 12  | Gère les utilisateurs et groupes            |
 | **VM2** | Serveur Samba         | Debian 12  | Partages réseau sécurisés (connecté à LDAP) |
-| **VM3** | Serveur de sauvegarde | Debian 11  | Réception des sauvegardes via `rsync`       |
+| **VM3** | Serveur de sauvegarde | Debian 12  | Réception des sauvegardes via `rsync`       |
 | **VM4** | Poste client          | Windows 10 | Test des accès Samba avec comptes LDAP      |
 
 Toutes les VMs sont interconnectées sur un **réseau interne VirtualBox** (192.168.100.0/24).
-
----
 
 ## Mise en œuvre
 
@@ -44,8 +36,6 @@ Toutes les VMs sont interconnectées sur un **réseau interne VirtualBox** (192.
 6. **Rédaction d'un script de sauvegarde `rsync`**, lancé chaque nuit via `cron`.
 7. **Test des accès depuis le poste Windows** : mappage des partages, tests de droits et quotas.
 
----
-
 ## Technologies utilisées
 
 - **Debian 12**
@@ -54,9 +44,7 @@ Toutes les VMs sont interconnectées sur un **réseau interne VirtualBox** (192.
 - **rsync + cron**
 - **quota**
 - **Windows 10**
-- **VirtualBox (réseau interne)**
-
----
+- **VmWare (réseau interne)**
 
 ## Résultats obtenus
 
@@ -66,19 +54,6 @@ Toutes les VMs sont interconnectées sur un **réseau interne VirtualBox** (192.
 - Sauvegarde automatisée transférée chaque nuit
 - Accès aux partages validé depuis un poste Windows
 
----
-
-## Captures d’écran
-
-> Les images ci-dessous peuvent être intégrées dans GitHub Pages ou dans une section visuelle.
-
-- Structure de l'annuaire LDAP
-- Configuration des partages Samba
-- Application des quotas
-- Script `rsync` de sauvegarde
-- Accès Windows aux partages Samba
-
----
 
 ## Pistes d'amélioration
 
@@ -87,11 +62,9 @@ Toutes les VMs sont interconnectées sur un **réseau interne VirtualBox** (192.
 - Automatisation du déploiement via **Ansible**
 - Intégration à un Active Directory existant
 
----
 
 ## Auteur
 
-Projet réalisé par **[Ton Nom]**  
-Avril 2025 – Dans le cadre d’une formation en administration système et réseau.
+Projet réalisé par **Marc.Khamchanh**
+Avril 2025 – Dans le cadre d’un projet personnel en administration système et réseau.
 
----
